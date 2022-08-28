@@ -1,0 +1,39 @@
+# estatistica descritiva e o ramo da estatistica que descreve e representa os dados
+
+# frequencia absoluta, e o numero de repeticoes do conjunto, qtd senior,pleno e junior
+# frequencia relativa, total da absoluta/qtd da linha 
+
+# total de alunos 25, alunos q tiraram 5 , freq relativa = 5/25
+
+
+nota = c(4,5,6,7,8,9)
+num.alunos = c(5,3,2,3,2,10)
+
+
+df = data.frame('notas'=nota,'numeros.alunos'=num.alunos)
+
+df %>%
+  mutate(frequencia.relativa= numeros.alunos/sum(numeros.alunos))%>%
+  bind_rows(summarise(.,across(where(is.numeric), sum)))
+
+
+# BIND_ROWS() devolve uma tibble , funciona como rbind, une os dataframes
+# sumarise(.), cria a sumarizacao
+# across() serve para aplicar funcao a colunas, caso queira criar coluna pode tbm
+# vantagem do across e usar embutido funcoes dplyr
+# e que diferente do apply a estrutura nao precisa existir e sim pode ser criada virtual
+
+df%>%
+  bind_rows(summarise(.,
+              across(where(is.numeric), sum))
+  
+# preciso do across inves de apply, pois e uma estrutura virtual e nao foi criada ainda
+
+df %>%
+  mutate(frequencia.relativa= numeros.alunos/sum(numeros.alunos),
+         frequencia.relativa= frequencia.relativa*100) %>%
+   bind_rows(summarise(.,
+              across(where(is.numeric), sum))
+
+
+  
